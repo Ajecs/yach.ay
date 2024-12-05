@@ -1,16 +1,16 @@
 import { Route, Routes } from 'react-router-dom'
 import { HomePage } from '../pages'
+import { ProductsList } from '../pages/Products/ProductsList'
 
 export const AllRoutes = () => {
   return (
-    <main>
+    <div className='flex flex-col py-4 pl-4 md:pl-10 dark:text-white dark:bg-gray-900 grow transition-colors duration-300'>
       <Routes>
         <Route path='/' element={<HomePage />} />
-        <Route path='/about' element={null} />
-        <Route path='/contact' element={null} />
+        <Route path='/products' element={<ProductsList />} />
       </Routes>
-    </main>
+    </div>
   )
 }
 
-export default AllRoutes    
+export default AllRoutes      
