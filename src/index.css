@@ -9,6 +9,7 @@
   --color-primary: hsl(58, 54%, 65%);
   --color-primary-darker: hsl(58, 54%, 60%);
   --color-secondary: hsl(55, 6%, 65%);
+  --color-accent: hsl(14, 84%, 65%)
 }
 
 * {
@@ -32,8 +33,47 @@ main {
   font-weight: 375;
   color: var(--color-secondary);
   font-style: normal;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+h1 {
+  font-size: 1.5rem;
+}
+
+h2 {
+  font-size: 1.25rem;
+}
+
+details > summary {
+  list-style-type: '▶️';
+  list-style-position: outside;
+}
+
+details[open]>summary {
+  list-style-type: '🔽';
+}
+
+details[open]>summary {
+  margin-bottom: 0.5rem;
 }
 
 
+details::marker {
+  margin-right: 2rem;
+}
 
-
+@media screen and (min-width: 768px) {
+  summary {
+    font-size: 1.5rem;
+  }
+}

@@ -1,2 +1,3 @@
-export { default as Header } from './Layouts/Header';
-export { default as Footer } from './Layouts/Footer';
+export { Header } from './Layouts/Header'
+export { Footer } from './Layouts/Footer'
+export { FeaturedProducts } from './Other/FeaturedProducts'
