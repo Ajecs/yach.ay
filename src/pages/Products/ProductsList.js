@@ -1,29 +1,36 @@
 import { useEffect, useState } from 'react'
-import { ProductCard } from '../../components/Elements/ProductCard'
+import { ProductCard } from '../../components'
 import { FilterBar } from './FilterBar'
+import { useLocation } from 'react-router-dom'
 
 export const ProductsList = () => {
   const [show, setShow] = useState(false)
   const [products, setProducts] = useState([])
 
-    useEffect(() => {
-      return () => {
-        async function fetchProducts() {
-          const response = await fetch(
-            'http://localhost:8000/products'
-          )
-          const data = await response.json()
-          setProducts(data)
-        }
+  const search = useLocation().search,
+    // Permite acceder al query string a partir de la ruta actual
+    searchTerm = new URLSearchParams(search).get('q')
+  // Permite obtener el parametro asociado con 'q ej. -> "react"
 
-        fetchProducts()
+  useEffect(() => {
+    return () => {
+      async function fetchProducts() {
+        const response = await fetch(
+          `http://localhost:8000/products?name_like=${
+            searchTerm ? searchTerm : ''
+          }`
+        )
+        const data = await response.json()
+        setProducts(data)
       }
-    }, [])
 
+      fetchProducts()
+    }
+  }, [searchTerm])
 
   return (
     <main className='relative'>
-      <section className=''>
+      <section>
         <div className='my-5 flex justify-between'>
           <span className='text-2xl font-semibold dark:text-slate-100 mb-5'>
             Ebooks ({products.length})
@@ -53,10 +60,12 @@ export const ProductsList = () => {
             </svg>
           </button>
         </div>
-        <div className='flex flex-wrap gap-12 justify-center lg:flex-row'>
-          {products.map((product) => (
-            <ProductCard product={product} key={product.id} />
-          ))}
+        <div className='w-full'>
+          <div className='mx-auto flex flex-wrap gap-12 lg:flex-row w-[95%] xl:w-full'>
+            {products.map((product) => (
+              <ProductCard product={product} key={product.id} />
+            ))}
+          </div>
         </div>
       </section>
       {show && <FilterBar setShow={setShow} />}

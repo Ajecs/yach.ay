@@ -4,6 +4,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        dark: 'hsl(0, 0%, 9%)',
         primary: {
           DEFAULT: 'hsl(58, 54%, 65%)',
           dark: 'hsl(58, 54%, 55%)',

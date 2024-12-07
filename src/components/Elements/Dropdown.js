@@ -7,7 +7,7 @@ export const Dropdown = () => {
       <button
         id='dropdownNavbarLink'
         data-dropdown-toggle='dropdownNavbar'
-        className='flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:text-primary md:border-0 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent'
+        className='border dark:border-0 rounded-xl text-secondary dark:text-secondary-light hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 text-sm'
       >
         {/* Avatar */}
         <Avatar />

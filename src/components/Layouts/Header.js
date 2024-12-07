@@ -46,19 +46,23 @@ export const Header = () => {
           </NavLink>
           {/* Menu */}
           <div className='md:max-w-4xl md:grow'>
-            <ul className='flex items-center font-medium rounded-lg md:border-0 md:ms-8 md:space-x-32 rtl:space-x-reverse md:flex-row md:mt-0 md:text-xl dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700'>
-              <li className='grow hidden md:block'>
+            <ul className='flex items-center font-medium rounded-lg md:border-0 md:ms-8 gap-x-3 md:gap-x-6 rtl:space-x-reverse md:flex-row md:mt-0 md:text-xl dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700'>
+              <li className='grow border rounded-lg'>
                 <Search />
               </li>
-              <li className='flex gap-x-4 md:gap-x-6'>
+              <li className='content-center'>
                 <Dropdown />
-                <button className=''>
+              </li>
+              <li className='content-center'>
+                <button className='border dark:border-0 rounded-xl text-secondary-light hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 text-sm'>
                   <img
-                    className='dark:invert'
+                    className='dark:invert block size-6'
                     src={CartIcon}
                     alt='Cart icon'
                   />
                 </button>
+              </li>
+              <li className='content-center'>
                 <BtDarkMode darkMode={darkMode} setDarkMode={setDarkMode} />
               </li>
             </ul>

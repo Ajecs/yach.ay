@@ -1,5 +1,5 @@
-import { ProductCard } from '../Elements/ProductCard'
 import { useEffect, useState } from 'react'
+import { ProductCard } from '../../components'
 
 export const FeaturedProducts = () => {
   const [products, setProducts] = useState([])
@@ -21,7 +21,7 @@ export const FeaturedProducts = () => {
       <h2 className='w-fit mx-auto md:text-3xl mb-4 md:mb-8'>
         Productos Destacados
       </h2>
-      <div className='border flex flex-col md:flex-row md:flex md:flex-wrap gap-8 md:gap-14'>
+      <div className='flex flex-col md:flex-row md:flex md:flex-wrap gap-8 md:gap-14'>
         {products.map((product) => (
           <ProductCard product={product} key={product.id} />
         ))}

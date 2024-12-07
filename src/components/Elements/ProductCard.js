@@ -2,17 +2,17 @@ import { Link } from 'react-router-dom'
 import { Rating } from './Rating'
 
 export const ProductCard = ({ product }) => {
-  const { name, overview, best_seller, image_local, rating } = product
+  const { id, name, overview, price, best_seller, image_local, rating } = product
 
   return (
     <div className='last:grow'>
-      <div className='max-w-fit h-full flex flex-col items-end bg-white border border-gray-200 rounded-lg shadow md:max-w-md dark:bg-gray-800 dark:border-gray-700'>
-        <Link to='/' className='relative'>
-          {best_seller ? (
+      <div className='h-full flex flex-col items-end bg-white border border-gray-200 rounded-lg shadow md:max-w-sm lg:max-w-md dark:bg-gray-800 dark:border-gray-700'>
+        <Link to={`/products/${id}`} className='relative'>
+          {best_seller && (
             <span className='absolute top-8 left-8 px-2 bg-accent-dark bg-opacity-90 text-white rounded'>
               Best Seller
             </span>
-          ) : null}
+          )}
           <img
             className='p-8 rounded-t-lg aspect-square object-cover'
             src={image_local}
@@ -21,7 +21,7 @@ export const ProductCard = ({ product }) => {
         </Link>
         {/* Text content */}
         <div className='px-5 pb-5 md:h-full md:flex md:flex-col'>
-          <Link to='/'>
+          <Link to={`/products/${id}`}>
             <h5 className='text-xl md:h-16 font-semibold tracking-tight text-gray-900 dark:text-white'>
               {name}
             </h5>
@@ -39,7 +39,7 @@ export const ProductCard = ({ product }) => {
           {/* Price */}
           <div className='flex items-center justify-between'>
             <span className='text-3xl font-bold text-gray-900 dark:text-white'>
-              $599
+              ${price}
             </span>
             {/* Button add to cart */}
             <button

@@ -1,8 +1,7 @@
-import { FeaturedProducts } from '../../components'
-import { ProductsList } from '../Products/ProductsList'
-import { Faq } from './Faq'
 import { Hero } from './Hero'
 import { Testimonials } from './Testimonials'
+import { Faq } from './Faq'
+import { FeaturedProducts } from './FeaturedProducts'
 
 export const HomePage = () => {
   return (
