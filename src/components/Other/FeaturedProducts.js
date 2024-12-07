@@ -17,15 +17,13 @@ export const FeaturedProducts = () => {
   }, [])
 
   return (
-    <div className='my-8'>
-      <h2 className='text-center md:text-3xl mb-4 md:mb-8'>
+    <div className='my-8 w-fit mx-auto'>
+      <h2 className='w-fit mx-auto md:text-3xl mb-4 md:mb-8'>
         Productos Destacados
       </h2>
-      <div className='flex flex-col justify-center md:flex-row md:flex md:flex-wrap gap-8 md:gap-16'>
+      <div className='border flex flex-col md:flex-row md:flex md:flex-wrap gap-8 md:gap-14'>
         {products.map((product) => (
-          <div className='flex flex-col justify-center md:flex-row md:flex md:flex-wrap gap-8 md:gap-16'>
-            <ProductCard product={product} key={product.id} />
-          </div>
+          <ProductCard product={product} key={product.id} />
         ))}
       </div>
     </div>
