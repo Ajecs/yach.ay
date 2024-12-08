@@ -77,3 +77,15 @@ details::marker {
     font-size: 1.5rem;
   }
 }
+
+.search-mobile:has(.searchBar) {
+  .searchBar {
+    display: block;
+    margin-inline: 1.5rem;
+  }
+
+  .lens {
+    display: none;
+  }
+
+}

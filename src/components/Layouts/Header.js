@@ -7,6 +7,8 @@ import { useEffect, useState } from 'react'
 import { Dropdown } from '../Elements/Dropdown'
 
 export const Header = () => {
+  const [showSearchBar, setShowSearchBar] = useState(false)
+
   const [darkMode, setDarkMode] = useState(
     JSON.parse(localStorage.getItem('darkMode')) || false
   )
@@ -19,18 +21,8 @@ export const Header = () => {
     }
   }, [darkMode])
 
-  const activeClass =
-      'block py-2 px-3 text-primary rounded md:text-primary md:p-0 dark:bg-blue-600 md:dark:text-secondary md:dark:bg-transparent',
-    inactiveClass =
-      'block py-2 px-3 text-primary rounded md:text-secondary md:hover:text-primary md:p-0 md:dark:text-secondary md:dark:text-secondary'
-
-  const handleActiveClass = ({ isActive }) => {
-    const className = isActive ? activeClass : inactiveClass
-    return className
-  }
-
   return (
-    <header className=''>
+    <header className='relative'>
       {/* Navbar */}
       <nav className='bg-white border border-b-200 dark:bg-gray-900 dark:border-gray-700 transition-colors duration-300'>
         <div className='flex flex-wrap justify-between items-center p-4 md:px-8 md:min-h-32'>
@@ -46,8 +38,14 @@ export const Header = () => {
           </NavLink>
           {/* Menu */}
           <div className='md:max-w-4xl md:grow'>
-            <ul className='flex items-center font-medium rounded-lg md:border-0 md:ms-8 gap-x-3 md:gap-x-6 rtl:space-x-reverse md:flex-row md:mt-0 md:text-xl dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700'>
-              <li className='grow border rounded-lg'>
+            <ul className='flex items-center font-medium rounded-lg md:border-0 md:ms-8 gap-x-3 md:gap-x-6 rtl:space-x-reverse md:flex-row md:mt-0 md:text-xl  '>
+              <li className='grow border dark:border-0 rounded-lg'>
+                <button
+                  onClick={() => setShowSearchBar(!showSearchBar)}
+                  className='lens md:hidden'
+                >
+                  <i className='text-secondary block text-2xl bi bi-search'></i>
+                </button>
                 <Search />
               </li>
               <li className='content-center'>
@@ -69,6 +67,12 @@ export const Header = () => {
           </div>
         </div>
       </nav>
+      {/* Hidden search for mobile */}
+      {showSearchBar && (
+        <div className='search-mobile md:hidden z-30 content-center absolute -bottom-15 left-0 py-4 w-full  bg-white dark:bg-gray-900'>
+          <Search setShowSearchBar={setShowSearchBar}/>
+        </div>
+      )}
     </header>
   )
 }
