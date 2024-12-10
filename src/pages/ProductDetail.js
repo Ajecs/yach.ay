@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Rating } from '../components'
+import { useTitle } from '../hooks/useTitle'
 export const ProductDetail = () => {
   const [product, setProduct] = useState({})
   // useState recibe {} ya que es el objeto (producto) del json que se intenta obtener
@@ -20,13 +21,17 @@ export const ProductDetail = () => {
     overview,
     long_description,
     price,
-    image_local,
     poster,
     in_stock,
     rating,
     size,
     best_seller
   } = product
+
+   useTitle(name)  
+
+  const tagStyles =
+    'shadow-inner rounded-lg py-1 px-2 uppercase dark:bg-neutral-100'
 
   return (
     <section className='mb-20'>
@@ -42,23 +47,17 @@ export const ProductDetail = () => {
               <Rating rating={rating} />
             </div>
             <div className='flex gap-3 md:gap-4 md:mb-0 text-sm font-semibold'>
-              {best_seller && 
-                <span className='shadow-inner rounded-lg py-1 px-2 uppercase text-yellow-500 dark:bg-neutral-100'>
+              {best_seller && (
+                <span className={`${tagStyles} text-yellow-500`}>
                   Más vendido
                 </span>
-              }
-              {in_stock ? (
-                <span className='shadow-inner rounded-lg py-1 px-2 uppercase text-green-600 dark:bg-neutral-100'>
-                  En stock
-                </span>
-              ) : (
-                <span className='shadow-inner rounded-lg py-1 px-2 uppercase text-red-600 dark:bg-neutral-100'>
-                  Agotado
-                </span>
               )}
-              <span className='shadow-inner rounded-lg py-1 px-2 uppercase text-blue-700 dark:bg-neutral-100'>
-                {size} mb
-              </span>
+              {in_stock ? (
+                <span className={`${tagStyles} text-green-600`}>En stock</span>
+              ) : (
+                <span className={`${tagStyles} text-red-600`}>Agotado</span>
+              )}
+              <span className={`${tagStyles} text-blue-600`}>{size} mb</span>
             </div>
             <button className='self-start bg-primary-dark hover:bg-primary-darker text-white text-sm my-4 px-4 py-2 font-medium md:text-xl md:px-6 md:py-4 rounded-lg'>
               Agregar al carrito{' '}
@@ -66,9 +65,7 @@ export const ProductDetail = () => {
                 <i className='bi bi-plus text-white'></i>
               </span>
             </button>
-            <p className=''>
-             {long_description}
-            </p>
+            <p className=''>{long_description}</p>
           </div>
         </div>
       </div>

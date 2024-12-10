@@ -1,9 +1,9 @@
-import { Hero } from './Hero'
-import { Testimonials } from './Testimonials'
-import { Faq } from './Faq'
-import { FeaturedProducts } from './FeaturedProducts'
+import { useTitle } from '../../hooks/useTitle'
+import { Hero, Testimonials, Faq, FeaturedProducts } from '.'
 
 export const HomePage = () => {
+  useTitle('Inicio')
+
   return (
     <main>
       <Hero />

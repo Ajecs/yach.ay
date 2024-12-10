@@ -1,4 +1,3 @@
-import { FeaturedProducts } from './Home/FeaturedProducts'
 
 export { HomePage } from './Home/HomePage'
 export { ProductsList } from './Products/ProductsList'
@@ -11,7 +10,3 @@ export { PageNotFound } from './PageNotFound'
 export { DashboardPage } from './Dashboard/DashboardPage'
 export { DashboardEmpty } from './Dashboard/DashboardEmpty'
 export { Login } from './Login'
-export { Faq } from './Home/Faq'
-export { Hero } from './Home/Hero'
-export { Testimonials } from './Home/Testimonials'
-export {FeaturedProducts} from './Home/FeaturedProducts'

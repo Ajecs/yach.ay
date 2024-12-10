@@ -4,10 +4,12 @@ import { NavLink } from 'react-router-dom'
 import { Search } from '../Sections/Search'
 import { BtDarkMode } from '../Elements/BtDarkMode'
 import { useEffect, useState } from 'react'
-import { Dropdown } from '../Elements/Dropdown'
+import { DropdownLoggedIn, DropdownLoggedOut } from '../../components'
+import { Avatar } from '../Elements/Avatar'
 
 export const Header = () => {
-  const [showSearchBar, setShowSearchBar] = useState(false)
+  const [showSearchBar, setShowSearchBar] = useState(false),
+    [showDropdown, setShowDropdown] = useState(false)
 
   const [darkMode, setDarkMode] = useState(
     JSON.parse(localStorage.getItem('darkMode')) || false
@@ -48,8 +50,16 @@ export const Header = () => {
                 </button>
                 <Search />
               </li>
-              <li className='content-center'>
-                <Dropdown />
+              <li className='content-center cursor-pointer'>
+                <button
+                  onClick={() => setShowDropdown(!showDropdown)}
+                  id='dropdownNavbarLink'
+                  data-dropdown-toggle='dropdownNavbar'
+                  className='border dark:border-0 rounded-xl text-secondary dark:text-secondary-light hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 text-sm'
+                >
+                  <Avatar />
+                </button>
+                {showDropdown && <DropdownLoggedOut />}
               </li>
               <li className='content-center'>
                 <button className='border dark:border-0 rounded-xl text-secondary-light hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 text-sm'>
@@ -70,7 +80,7 @@ export const Header = () => {
       {/* Hidden search for mobile */}
       {showSearchBar && (
         <div className='search-mobile md:hidden z-30 content-center absolute -bottom-15 left-0 py-4 w-full  bg-white dark:bg-gray-900'>
-          <Search setShowSearchBar={setShowSearchBar}/>
+          <Search setShowSearchBar={setShowSearchBar} />
         </div>
       )}
     </header>

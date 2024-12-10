@@ -1,11 +1,17 @@
 import { useEffect, useState } from 'react'
-import { ProductCard } from '../../components'
-import { FilterBar } from './FilterBar'
 import { useLocation } from 'react-router-dom'
+import { ProductCard } from '../../components'
+import { useFilter } from '../../context'
+import { useTitle } from '../../hooks/useTitle'
+import { FilterBar } from './FilterBar'
 
 export const ProductsList = () => {
+  // De esta forma se tiene acceso a los valores del contexto
+  const { products, initialProductList } = useFilter()
+
   const [show, setShow] = useState(false)
-  const [products, setProducts] = useState([])
+
+  useTitle('Ebooks')
 
   const search = useLocation().search,
     // Permite acceder al query string a partir de la ruta actual
@@ -13,25 +19,23 @@ export const ProductsList = () => {
   // Permite obtener el parametro asociado con 'q ej. -> "react"
 
   useEffect(() => {
-    return () => {
-      async function fetchProducts() {
-        const response = await fetch(
-          `http://localhost:8000/products?name_like=${
-            searchTerm ? searchTerm : ''
-          }`
-        )
-        const data = await response.json()
-        setProducts(data)
-      }
-
-      fetchProducts()
+    async function fetchProducts() {
+      const response = await fetch(
+        `http://localhost:8000/products?name_like=${
+          searchTerm ? searchTerm : ''
+        }`
+      )
+      const data = await response.json()
+      initialProductList(data)
     }
+
+    fetchProducts()
   }, [searchTerm])
 
   return (
     <main className='relative'>
       <section>
-        <div className='my-5 flex justify-between'>
+        <div className='w-fit me-5 ms-auto my-5 flex items-center gap-12'>
           <span className='text-2xl font-semibold dark:text-slate-100 mb-5'>
             Ebooks ({products.length})
           </span>
@@ -42,7 +46,7 @@ export const ProductsList = () => {
             data-drawer-toggle='default-sidebar'
             aria-controls='default-sidebar'
             type='button'
-            className='w-fit self-start order-last inline-flex items-center p-2 text-sm  text-secondary-dark rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600'
+            className='md:-mt-3 -mt-5 w-fit order-last inline-flex items-center p-2 text-sm  text-secondary-dark rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600'
           >
             <span className='sr-only'>Open sidebar</span>
             <svg
