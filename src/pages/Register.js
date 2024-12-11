@@ -1,7 +1,34 @@
-import { Link } from 'react-router-dom'
-import Logo from '../assets/images/yachay-logo.svg'
+import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 export const Register = () => {
+  const navigate = useNavigate()
+
+  const handleRegister = async (event) => {
+    event.preventDefault()
+    const authDetail = {
+      name: event.target.name.value,
+      email: event.target.email.value,
+      password: event.target.password.value
+    }
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(authDetail)
+    }
+    const response = await fetch(
+      'http://localhost:8000/register',
+      requestOptions
+    )
+    // json server auth contiene la ruta /register para registrar nuevos usuarios
+
+    const data = await response.json()
+
+    console.log(data.accessToken)
+    
+    data.accessToken ? navigate('/products') : toast.error(data)
+  }
+
   return (
     <section className='bg-gray-50 dark:bg-gray-900'>
       <div className='flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-4'>
@@ -10,7 +37,22 @@ export const Register = () => {
             <h1 className='text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white'>
               Crea una cuenta
             </h1>
-            <form className='space-y-4 md:space-y-6' action='/'>
+            <form onSubmit={handleRegister} className='space-y-4 md:space-y-6'>
+              <div>
+                <label
+                  htmlFor='name'
+                  className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
+                >
+                  Tu nombre
+                </label>
+                <input
+                  type='name'
+                  id='name'
+                  name='name'
+                  className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                  required
+                />
+              </div>
               <div>
                 <label
                   htmlFor='email'

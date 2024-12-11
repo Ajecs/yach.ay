@@ -238,5 +238,78 @@
     }
   ],
   "orders": [],
-  "users": []
+  "users": [
+    {
+      "email": "nico7coriale@gmail.com",
+      "password": "$2a$10$sdb9brqz90g.E5FOmgq97.PXgDnzufvg7OohtjNQzz6n2o6vUqEO.",
+      "name": "Ajecs",
+      "id": 1
+    },
+    {
+      "email": "raboxam509@hapincy.com",
+      "password": "$2a$10$8tcoswe/LuVqN62Ja/BeQuiNeONCXF.K/fB2OmIw0Ab87OHH0r/xK",
+      "name": "Massi",
+      "id": 2
+    },
+    {
+      "email": "grasm49@hotmail.com",
+      "password": "$2a$10$08FKiY3DqZobvaZ1bH6Fy.xnPEQfP9jj.rZmlkugUaZXRINpwc9OO",
+      "name": "Paleta acento verde",
+      "id": 3
+    },
+    {
+      "email": "nico7core@gmail.com",
+      "password": "$2a$10$iboyDbLCuAEuL/tmxvWAe.1irDlaJEyiVYSX6JFpmlkBYfrzjJM/i",
+      "name": "Verde VG",
+      "id": 4
+    },
+    {
+      "email": "nico7csdfdsore@gmail.com",
+      "password": "$2a$10$8IeEPwgP4yp3tSnbygIvIe2HdeQPk9btRhvXue5cwIlDvHwsoWcu2",
+      "name": "fdgfdg",
+      "id": 5
+    },
+    {
+      "email": "nico7csdfsdffdsore@gmail.com",
+      "password": "$2a$10$x1ZxcsJfULTVzb1a2B0NeeqhUwUChV5w7I/ism/GZSmnrtJGqZQ2u",
+      "name": "fdgfdg",
+      "id": 6
+    },
+    {
+      "email": "grasm49@hdsadotmail.com",
+      "password": "$2a$10$x0yU.Nhxmry9XmM.8V3ZjegIo0sbfa54lk6VBPtLAgz2f06NR9Rh.",
+      "name": "giffy",
+      "id": 7
+    },
+    {
+      "email": "nico7corfsdfiale@hotmail.com",
+      "password": "$2a$10$BS1yNxsFpILO/NRkLy7KJOP98UJwNdTpqAdPkm9eL444gEQTQ/FMu",
+      "name": "Ajecs",
+      "id": 8
+    },
+    {
+      "email": "nico7coriale@hfdsfdsotmail.com",
+      "password": "$2a$10$j4X76O8htfisdxI4u7FbUeDcpXSsPkUSkLJToXy/1htzugfdYyImO",
+      "name": "Ajecs",
+      "id": 9
+    },
+    {
+      "email": "nico7corifsdfdsale@hfdsfdsotmail.com",
+      "password": "$2a$10$nRJg0hNkO9PyNaF/M8x2QuCo371W61JYTE5pPdwCqicZ6PFqSbFYe",
+      "name": "Ajecs",
+      "id": 10
+    },
+    {
+      "email": "nico7corgfdgfdifsdfdsale@hfdsfdsotmail.com",
+      "password": "$2a$10$EJZ14a6RutGvUhmplaZu8uxN0W4zCDB/cAV1YrcE2/OPN9aQFdj16",
+      "name": "Ajecs",
+      "id": 11
+    },
+    {
+      "email": "nico7codfdsfdriale@gmail.com",
+      "password": "$2a$10$KU5rZExEcehoKFyToO2NW.SkFT320e8AKfFdetasqBPdWBj9NPIFe",
+      "name": "Ajecs",
+      "id": 12
+    }
+  ]
 }
