@@ -8,6 +8,8 @@ import { DropdownLoggedIn, DropdownLoggedOut } from '../../components'
 import { Avatar } from '../Elements/Avatar'
 
 export const Header = () => {
+  const token = JSON.parse(sessionStorage.getItem('token'))
+
   const [showSearchBar, setShowSearchBar] = useState(false),
     [showDropdown, setShowDropdown] = useState(false)
 
@@ -59,7 +61,12 @@ export const Header = () => {
                 >
                   <Avatar />
                 </button>
-                {showDropdown && <DropdownLoggedOut />}
+                {showDropdown &&
+                  (token ? (
+                    <DropdownLoggedIn setShowDropdown={setShowDropdown} />
+                  ) : (
+                    <DropdownLoggedOut setShowDropdown={setShowDropdown} />
+                  ))}
               </li>
               <li className='content-center'>
                 <button className='border dark:border-0 rounded-xl text-secondary-light hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 text-sm'>

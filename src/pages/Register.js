@@ -1,15 +1,20 @@
+import { useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 export const Register = () => {
   const navigate = useNavigate()
 
+  const nameRef = useRef(),
+    emailRef = useRef(),
+    passwordRef = useRef()
+
   const handleRegister = async (event) => {
     event.preventDefault()
     const authDetail = {
-      name: event.target.name.value,
-      email: event.target.email.value,
-      password: event.target.password.value
+      name: nameRef.current.value,
+      email: emailRef.current.value,
+      password: passwordRef.current.value
     }
     const requestOptions = {
       method: 'POST',
@@ -25,7 +30,7 @@ export const Register = () => {
     const data = await response.json()
 
     console.log(data.accessToken)
-    
+
     data.accessToken ? navigate('/products') : toast.error(data)
   }
 
@@ -46,6 +51,7 @@ export const Register = () => {
                   Tu nombre
                 </label>
                 <input
+                  ref={nameRef}
                   type='name'
                   id='name'
                   name='name'
@@ -61,6 +67,7 @@ export const Register = () => {
                   Tu correo electrónico
                 </label>
                 <input
+                  ref={emailRef}
                   type='email'
                   name='email'
                   id='email'
@@ -77,6 +84,7 @@ export const Register = () => {
                   Contraseña
                 </label>
                 <input
+                  ref={passwordRef}
                   type='password'
                   name='password'
                   id='password'

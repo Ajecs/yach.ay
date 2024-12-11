@@ -14,7 +14,7 @@ root.render(
   <React.StrictMode>
     <Router>
       <FilterProvider>
-        <ToastContainer position='bottom-right'/>
+        <ToastContainer position='bottom-right' hideProgressBar={true} />
         <App />
       </FilterProvider>
     </Router>

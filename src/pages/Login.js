@@ -20,9 +20,27 @@ export const Login = () => {
     }
     const response = await fetch('http://localhost:8000/login', requestOptions),
       data = await response.json()
-    console.log(data)
 
     data.accessToken ? navigate('/products') : toast.error(data)
+
+    /* TODO customize error messages 
+
+    router.stack = router.stack.filter(item => item.handle.length !== 4)
+
+    router.use((err, req, res, next) => {
+      let status = 500
+    *  if (err.message === 'Insert failed, duplicate id') {
+        status = 409
+      }
+      res.status(status).send({
+        message: err.message
+      })
+    })  */
+
+    if (data.accessToken) {
+      sessionStorage.setItem('token', JSON.stringify(data.accessToken))
+      sessionStorage.setItem('cbid', JSON.stringify(data.user.id))
+    }
   }
 
   return (
