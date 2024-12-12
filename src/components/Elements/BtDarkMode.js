@@ -4,12 +4,12 @@ export const BtDarkMode = ({ darkMode, setDarkMode }) => {
       onClick={() => setDarkMode(!darkMode)}
       id='theme-toggle'
       type='button'
-      className='border dark:border-0 rounded-xl text-secondary dark:text-secondary-light hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 text-sm '
+      className='border dark:border-0 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 text-sm '
     >
       {darkMode ? (
         <svg
           id='theme-toggle-dark-icon'
-          className=' size-6'
+          className=' size-7'
           fill='currentColor'
           viewBox='0 0 20 20'
           xmlns='http://www.w3.org/2000/svg'
@@ -19,7 +19,7 @@ export const BtDarkMode = ({ darkMode, setDarkMode }) => {
       ) : (
         <svg
           id='theme-toggle-light-icon'
-          className='size-6'
+          className='size-7'
           fill='currentColor'
           viewBox='0 0 20 20'
           xmlns='http://www.w3.org/2000/svg'

@@ -1,4 +1,3 @@
-import CartIcon from '../../assets/images/cart-icon.svg'
 import Logo from '../../assets/images/yachay-logo.svg'
 import { NavLink } from 'react-router-dom'
 import { Search } from '../Sections/Search'
@@ -6,6 +5,7 @@ import { BtDarkMode } from '../Elements/BtDarkMode'
 import { useEffect, useState } from 'react'
 import { DropdownLoggedIn, DropdownLoggedOut } from '../../components'
 import { Avatar } from '../Elements/Avatar'
+import { CartIcon } from '../Elements/CartIcon'
 
 export const Header = () => {
   const token = JSON.parse(sessionStorage.getItem('token'))
@@ -42,7 +42,7 @@ export const Header = () => {
           </NavLink>
           {/* Menu */}
           <div className='md:max-w-4xl md:grow'>
-            <ul className='flex items-center font-medium rounded-lg md:border-0 md:ms-8 gap-x-3 md:gap-x-6 rtl:space-x-reverse md:flex-row md:mt-0 md:text-xl  '>
+            <ul className='flex items-center font-medium h-full text-secondary dark:text-secondary-light rounded-lg md:ms-8 gap-x-4 md:gap-x-6 rtl:space-x-reverse md:flex-row md:mt-0 md:text-xl  '>
               <li className='grow border dark:border-0 rounded-lg'>
                 <button
                   onClick={() => setShowSearchBar(!showSearchBar)}
@@ -68,14 +68,11 @@ export const Header = () => {
                     <DropdownLoggedOut setShowDropdown={setShowDropdown} />
                   ))}
               </li>
-              <li className='content-center'>
-                <button className='border dark:border-0 rounded-xl text-secondary-light hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 text-sm'>
-                  <img
-                    className='dark:invert block size-6'
-                    src={CartIcon}
-                    alt='Cart icon'
-                  />
-                </button>
+              <li className='relative content-center'>
+                <span className='absolute -top-2 -right-2 text-xs md:text-sm font-bold bg-white dark:bg-secondary-dark text-secondary-dark dark:text-white border border-secondary-dark rounded-full w-4 h-4 md:h-[18px] flex items-center justify-center'>0</span>
+                <NavLink to='cart' className=' flex dark:border-0 rounded-xl size-6 md:size-7 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 text-sm'>
+                  <CartIcon />
+                </NavLink>
               </li>
               <li className='content-center'>
                 <BtDarkMode darkMode={darkMode} setDarkMode={setDarkMode} />
