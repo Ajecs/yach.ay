@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { FilterProvider } from './context'
+import { FilterProvider, CartProvider } from './context'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 
@@ -13,10 +13,12 @@ const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
     <Router>
-      <FilterProvider>
-        <ToastContainer position='bottom-right' hideProgressBar={true} />
-        <App />
-      </FilterProvider>
+      <CartProvider>
+        <FilterProvider>
+          <ToastContainer position='bottom-right' hideProgressBar={true} />
+          <App />
+        </FilterProvider>
+      </CartProvider>
     </Router>
   </React.StrictMode>
 )
