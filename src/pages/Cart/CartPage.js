@@ -1,9 +1,13 @@
+import { useCart } from "../../context"
+import { CartList } from "../Cart/CartList"
 import { CartEmpty } from "./CartEmpty"
-import { CartList } from "./CartList"
 
 export const CartPage = () => {
-  const cartListLenght = 0
-  return <main className=" size-full mx-auto py-4">
-    {cartListLenght > 0 ? <CartList /> : <CartEmpty />}
-  </main>
+  const {cartList} = useCart()
+
+  return (
+    <main className=' size-full mx-auto py-4'>
+      {cartList.length ? <CartList /> : <CartEmpty />}
+    </main>
+  )
 }

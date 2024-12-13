@@ -6,9 +6,12 @@ import { useEffect, useState } from 'react'
 import { DropdownLoggedIn, DropdownLoggedOut } from '../../components'
 import { Avatar } from '../Elements/Avatar'
 import { CartIcon } from '../Elements/CartIcon'
+import { useCart } from '../../context'
 
 export const Header = () => {
   const token = JSON.parse(sessionStorage.getItem('token'))
+
+  const { cartList } = useCart()
 
   const [showSearchBar, setShowSearchBar] = useState(false),
     [showDropdown, setShowDropdown] = useState(false)
@@ -26,7 +29,7 @@ export const Header = () => {
   }, [darkMode])
 
   return (
-    <header className='relative'>
+    <header className='sticky top-0 z-30'>
       {/* Navbar */}
       <nav className='bg-white border border-b-200 dark:bg-gray-900 dark:border-gray-700 transition-colors duration-300'>
         <div className='flex flex-wrap justify-between items-center p-4 md:px-8 md:min-h-32'>
@@ -69,8 +72,13 @@ export const Header = () => {
                   ))}
               </li>
               <li className='relative content-center'>
-                <span className='absolute -top-2 -right-2 text-xs md:text-sm font-bold bg-white dark:bg-secondary-dark text-secondary-dark dark:text-white border border-secondary-dark rounded-full w-4 h-4 md:h-[18px] flex items-center justify-center'>0</span>
-                <NavLink to='cart' className=' flex dark:border-0 rounded-xl size-6 md:size-7 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 text-sm'>
+                <span className='absolute -top-2 -right-2 text-xs md:text-sm font-bold bg-white dark:bg-secondary-dark text-secondary-dark dark:text-white border border-secondary-dark rounded-full w-4 h-4 md:h-[18px] flex items-center justify-center'>
+                  {cartList.length}
+                </span>
+                <NavLink
+                  to='cart'
+                  className=' flex dark:border-0 rounded-xl size-6 md:size-7 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 text-sm'
+                >
                   <CartIcon />
                 </NavLink>
               </li>

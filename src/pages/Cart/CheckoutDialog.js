@@ -1,6 +1,10 @@
+import { useCart } from "../../context"
+
 export const CheckoutDialog = ({ setShowDialog }) => {
+  const {total} = useCart()
+
   return (
-    <div className='content-center absolute top-0 left-0 bg-black/50 size-full'>
+    <div className='content-center absolute z-50 top-0 left-0 bg-black/50 size-full'>
       <div className='text-secondary-dark mx-auto px-8 md:px-12 py-6 md:py-8 bg-white  w-[75%] md:w-[50%] rounded-xl'>
         <div className='relative'>
           <span
@@ -88,7 +92,7 @@ export const CheckoutDialog = ({ setShowDialog }) => {
             </div>
           </div>
           <span className="mx-auto lg:mx-0 text-2xl font-bold">
-            $99
+            ${total}
           </span>
           <button
             onClick={() => setShowDialog(false)}

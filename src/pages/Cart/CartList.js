@@ -1,46 +1,36 @@
-import { useState } from "react"
-import { CartCard } from "../Cart/CartCard"
-import { CheckoutDialog } from "../Cart/CheckoutDialog"
+import { useState } from 'react'
+import { CartCard } from '../Cart/CartCard'
+import { CheckoutDialog } from '../Cart/CheckoutDialog'
+import { useCart } from '../../context'
 
 export const CartList = () => {
   const [showDialog, setShowDialog] = useState(false)
-  
-  const cartList = [
-    {
-      id: 1,
-      name: 'React desde cero',
-      price: 20,
-      quantity: 2,
-      poster:
-        'https://images.unsplash.com/photo-1613490900233-141c5560d75d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=650&q=40'
-    },
-    {
-      id: 2,
-      name: 'Node.js desde cero',
-      price: 30,
-      quantity: 1,
-      poster:
-        'https://images.unsplash.com/photo-1522542550221-31fd19575a2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=650&q=40'
-    }
-  ]
+
+  const { cartList, total } = useCart()
 
   return (
-    <section className='md:w-[90%] my-8 mx-auto p-4 flex flex-col'>
-      <h1 className='mb-12'>Lista del carrito(2)</h1>
-      <section className='flex flex-col gap-6 mb-8'>
+    <section className='md:w-[90%] mt-2 mb-8 mx-auto p-4 flex flex-col'>
+      <h1 className='mb-5'>Lista del carrito ({cartList.length})</h1>
+      <section className=''>
         {cartList.map((product) => (
           <CartCard key={product.id} product={product} />
         ))}
       </section>
-      <div className='border-b-2 py-4 md:px-8 mb-4'>
-        <p className='font-bold'>
-          Total: <span>$200</span>
-        </p>
+      <div className='py-2.5 md:text-xl grid grid-cols-4 justify-items-center items-center'>
+        <span className='justify-self-start font-bold'>Total:</span>
+        <span></span>
+        <span className='self-center'>${total}</span>
+        <button
+          onClick={() => {
+            window.scrollTo(0, 0)
+            setShowDialog(true)
+          }}
+          className='px-4 md:px-6 py-2 md:py-4 justify-self-start flex items-center gap-x-2 text-white text-xs font-medium lg:text-xl bg-primary-dark hover:bg-primary-darker  rounded-lg'
+        >
+          Realizar pedido <span className='bi bi-arrow-right mt-1'></span>
+        </button>
       </div>
-      <button onClick={() => setShowDialog(true)} className='self-end me-4 flex items-center gap-x-2 bg-primary-dark hover:bg-primary-darker text-white text-sm px-4 py-2 font-medium md:text-xl md:px-6 md:py-4 rounded-lg'>
-        Realizar pedido <span className='bi bi-arrow-right mt-1'></span>
-      </button>
-      {showDialog && <CheckoutDialog setShowDialog={setShowDialog}/>}
+      {showDialog && <CheckoutDialog setShowDialog={setShowDialog} />}
     </section>
   )
 }

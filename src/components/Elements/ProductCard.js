@@ -1,8 +1,27 @@
 import { Link } from 'react-router-dom'
 import { Rating } from './Rating'
+import { useCart } from '../../context'
+import { useEffect, useState } from 'react'
 
 export const ProductCard = ({ product }) => {
-  const { id, name, overview, price, best_seller, image_local, rating } = product
+  const { cartList, addToCart, removeFromCart } = useCart(),
+    [isInCart, setIsInCart] = useState(false)
+
+  const { id, name, overview, price, best_seller, image_local, rating } =
+    product
+
+  useEffect(() => {
+    const productInCart = cartList.find((item) => item.id === id)
+    if (productInCart) {
+      setIsInCart(true)
+    } else {
+      setIsInCart(false)
+    }
+  }, [cartList, id])
+
+  function handleClick(product) {
+    addToCart(product)
+  }
 
   return (
     <div className='last:grow'>
@@ -42,12 +61,24 @@ export const ProductCard = ({ product }) => {
               ${price}
             </span>
             {/* Button add to cart */}
-            <button
-              to='/cart'
-              className='text-white  bg-primary-dark hover:bg-primary-darker focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center md:text-lg'
-            >
-              <Link to='/cart'>Agregar al carrito</Link>
-            </button>
+            {!isInCart && (
+              <button
+                onClick={() => handleClick(product)}
+                className='px-5 py-2.5 inline-flex gap-1 text-white font-medium rounded-lg text-sm text-center md:text-lg bg-primary-dark hover:bg-primary-darker'
+              >
+                Agregar al carrito
+                <span className='bi bi-cart-plus'></span>
+              </button>
+            )}
+            {isInCart && (
+              <button
+                onClick={() => removeFromCart(product)}
+                className='px-5 py-2.5 inline-flex gap-1 text-white text-center md:text-lg font-medium rounded-lg text-sm bg-red-500 hover:bg-red-600'
+              >
+                Eliminar del carrito
+                <span className='bi bi-trash'></span>
+              </button>
+            )}
           </div>
         </div>
       </div>

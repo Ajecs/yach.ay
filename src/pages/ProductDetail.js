@@ -2,7 +2,12 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Rating } from '../components'
 import { useTitle } from '../hooks/useTitle'
+import { useCart } from '../context'
+
 export const ProductDetail = () => {
+  const { cartList, addToCart, removeFromCart } = useCart(),
+    [isInCart, setIsInCart] = useState(false)
+
   const [product, setProduct] = useState({})
   // useState recibe {} ya que es el objeto (producto) del json que se intenta obtener
   const { id } = useParams()
@@ -16,6 +21,15 @@ export const ProductDetail = () => {
     fetchProducts()
   }, [id])
 
+  useEffect(() => {
+    const productInCart = cartList.find((item) => item.id === product.id)
+    if (productInCart) {
+      setIsInCart(true)
+    } else {
+      setIsInCart(false)
+    }
+  }, [cartList, product.id])
+
   const {
     name,
     overview,
@@ -28,20 +42,22 @@ export const ProductDetail = () => {
     best_seller
   } = product
 
-   useTitle(name)  
+  useTitle(name)
 
   const tagStyles =
     'shadow-inner rounded-lg py-1 px-2 uppercase dark:bg-neutral-100'
 
   return (
-    <section className='mb-20'>
-      <div className='md:w-3/4 mx-auto'>
-        <h1>{name}</h1>
-        <p className='my-4'>{overview}</p>
-        <div className='flex flex-col md:flex-row gap-4 md:gap-16'>
-          <img className='w-full' src={poster} alt='product' />
+    <section className='mb-20 mt-8'>
+      <div className=' md:grid md:grid-cols-auto grid-rows-auto md:w-3/4 mx-auto'>
+        <div className='md:w-[60%]'>
+          <h1>{name}</h1>
+          <p className='my-4'>{overview}</p>
+        </div>
+        <div className='flex flex-col md:flex-row items-start gap-4 md:gap-8'>
+          <img className='border' src={poster} alt='product' />
           {/* text content */}
-          <div className='flex flex-col gap-2 md:gap-3'>
+          <div className='flex flex-col items-start gap-2 md:gap-3'>
             <span className='block text-3xl font-bold'>${price}</span>
             <div className='flex gap-1 md:text-xl'>
               <Rating rating={rating} />
@@ -59,13 +75,24 @@ export const ProductDetail = () => {
               )}
               <span className={`${tagStyles} text-blue-600`}>{size} mb</span>
             </div>
-            <button className='self-start bg-primary-dark hover:bg-primary-darker text-white text-sm my-4 px-4 py-2 font-medium md:text-xl md:px-6 md:py-4 rounded-lg'>
-              Agregar al carrito{' '}
-              <span>
-                <i className='bi bi-plus text-white'></i>
-              </span>
-            </button>
-            <p className=''>{long_description}</p>
+            {!isInCart && (
+              <button
+                onClick={() => addToCart(product)}
+                className='px-5 py-2.5 inline-flex  gap-1 text-white font-medium rounded-lg text-sm md:text-lg bg-primary-dark hover:bg-primary-darker'
+              >
+                Agregar al carrito
+                <span className='bi bi-cart-plus'></span>
+              </button>
+            )}
+            {isInCart && (
+              <button
+                onClick={() => removeFromCart(product)}
+                className='px-5 py-2.5 inline-flex gap-1 text-white text-center md:text-lg font-medium rounded-lg text-sm bg-red-500 hover:bg-red-600'
+              >
+                Eliminar del carrito
+                <span className='bi bi-trash'></span>
+              </button>
+            )}
           </div>
         </div>
       </div>
