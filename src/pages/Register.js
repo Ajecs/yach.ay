@@ -28,10 +28,12 @@ export const Register = () => {
     // json server auth contiene la ruta /register para registrar nuevos usuarios
 
     const data = await response.json()
-
-    console.log(data.accessToken)
-
     data.accessToken ? navigate('/products') : toast.error(data)
+
+      if (data.accessToken) {
+        sessionStorage.setItem('token', JSON.stringify(data.accessToken))
+        sessionStorage.setItem('yd', JSON.stringify(data.user.id))
+      }
   }
 
   return (

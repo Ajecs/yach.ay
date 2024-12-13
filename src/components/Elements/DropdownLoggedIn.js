@@ -5,7 +5,7 @@ export const DropdownLoggedIn = (setShowDropdown) => {
 
   function handleLogOut() {
     sessionStorage.removeItem('token')
-    sessionStorage.removeItem('cbid')
+    sessionStorage.removeItem('yid')
     setShowDropdown(false)
     navigate('/')
   }

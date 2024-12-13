@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import { CartPage, HomePage, Login, ProductDetail, Register } from '../pages'
 import { ProductsList } from '../pages/Products/ProductsList'
+import { ProtectedRoutes } from './ProtectedRoutes'
 
 export const AllRoutes = () => {
   return (
@@ -9,9 +10,18 @@ export const AllRoutes = () => {
         <Route path='/' element={<HomePage />} />
         <Route path='products' element={<ProductsList />} />
         <Route path='products/:id' element={<ProductDetail />} />
+
         <Route path='register' element={<Register />} />
         <Route path='login' element={<Login />} />
-        <Route path='cart' element={<CartPage />} />
+
+        <Route
+          path='cart'
+          element={
+            <ProtectedRoutes>
+              <CartPage />
+            </ProtectedRoutes>
+          }
+        />
       </Routes>
     </div>
   )

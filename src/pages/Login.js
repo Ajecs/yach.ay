@@ -39,7 +39,7 @@ export const Login = () => {
 
     if (data.accessToken) {
       sessionStorage.setItem('token', JSON.stringify(data.accessToken))
-      sessionStorage.setItem('cbid', JSON.stringify(data.user.id))
+      sessionStorage.setItem('yid', JSON.stringify(data.user.id))
     }
   }
 

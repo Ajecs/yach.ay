@@ -241,9 +241,15 @@
   "users": [
     {
       "email": "nico7coriale@gmail.com",
-      "password": "$2a$10$Sz/TFF5QKyXTAAnC0ZVviuQeYJHno21ECZs/k.1jZRN6MAKZvexA.",
+      "password": "$2a$10$Jf3DmF79nMRqlgQn1AtmJ.K1tkodZ.28nl3NE7uyWskd5Cc5UWSP2",
       "name": "Ajecs",
       "id": 1
+    },
+    {
+      "email": "patriciacardozo069@gmail.com",
+      "password": "$2a$10$tVGWPcQ6LIUkVrns/YFik.hAB4H5IX1GTtutf5YNKoDV2bANC.kgK",
+      "name": "Graciela Sanchez",
+      "id": 2
     }
   ]
 }
