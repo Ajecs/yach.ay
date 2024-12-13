@@ -7,8 +7,16 @@ export const ProductCard = ({ product }) => {
   const { cartList, addToCart, removeFromCart } = useCart(),
     [isInCart, setIsInCart] = useState(false)
 
-  const { id, name, overview, price, best_seller, image_local, rating } =
-    product
+  const {
+    id,
+    name,
+    overview,
+    price,
+    best_seller,
+    image_local,
+    rating,
+    in_stock
+  } = product
 
   useEffect(() => {
     const productInCart = cartList.find((item) => item.id === id)
@@ -65,6 +73,7 @@ export const ProductCard = ({ product }) => {
               <button
                 onClick={() => handleClick(product)}
                 className='px-5 py-2.5 inline-flex gap-1 text-white font-medium rounded-lg text-sm text-center md:text-lg bg-primary-dark hover:bg-primary-darker'
+                disabled={!in_stock}
               >
                 Agregar al carrito
                 <span className='bi bi-cart-plus'></span>
@@ -74,6 +83,7 @@ export const ProductCard = ({ product }) => {
               <button
                 onClick={() => removeFromCart(product)}
                 className='px-5 py-2.5 inline-flex gap-1 text-white text-center md:text-lg font-medium rounded-lg text-sm bg-red-500 hover:bg-red-600'
+                disabled={!in_stock}
               >
                 Eliminar del carrito
                 <span className='bi bi-trash'></span>

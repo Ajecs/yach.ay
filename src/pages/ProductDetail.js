@@ -49,13 +49,13 @@ export const ProductDetail = () => {
 
   return (
     <section className='mb-20 mt-8'>
-      <div className=' md:grid md:grid-cols-auto grid-rows-auto md:w-3/4 mx-auto'>
+      <div className=' md:grid md:grid-cols-auto grid-rows-auto md:w-[80%] mx-auto'>
         <div className='md:w-[60%]'>
           <h1>{name}</h1>
           <p className='my-4'>{overview}</p>
         </div>
-        <div className='flex flex-col md:flex-row items-start gap-4 md:gap-8'>
-          <img className='border' src={poster} alt='product' />
+        <div className='flex flex-col md:flex-row items-center gap-4 md:gap-8'>
+          <img className='size-full' src={poster} alt='product' />
           {/* text content */}
           <div className='flex flex-col items-start gap-2 md:gap-3'>
             <span className='block text-3xl font-bold'>${price}</span>
@@ -78,7 +78,8 @@ export const ProductDetail = () => {
             {!isInCart && (
               <button
                 onClick={() => addToCart(product)}
-                className='px-5 py-2.5 inline-flex  gap-1 text-white font-medium rounded-lg text-sm md:text-lg bg-primary-dark hover:bg-primary-darker'
+                className='px-5 py-2.5 inline-flex gap-1 text-white font-medium rounded-lg text-sm md:text-lg bg-primary-dark hover:bg-primary-darker'
+                disabled={!in_stock}
               >
                 Agregar al carrito
                 <span className='bi bi-cart-plus'></span>
@@ -88,11 +89,13 @@ export const ProductDetail = () => {
               <button
                 onClick={() => removeFromCart(product)}
                 className='px-5 py-2.5 inline-flex gap-1 text-white text-center md:text-lg font-medium rounded-lg text-sm bg-red-500 hover:bg-red-600'
+                disabled={!in_stock}
               >
                 Eliminar del carrito
                 <span className='bi bi-trash'></span>
               </button>
             )}
+            <p className='mt-4'>{long_description}</p>
           </div>
         </div>
       </div>
