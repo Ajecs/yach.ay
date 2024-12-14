@@ -1,11 +1,11 @@
 import { Route, Routes } from 'react-router-dom'
-import { CartPage, HomePage, Login, ProductDetail, Register } from '../pages'
+import { CartPage, HomePage, Login, OrderPage, ProductDetail, Register } from '../pages'
 import { ProductsList } from '../pages/Products/ProductsList'
 import { ProtectedRoutes } from './ProtectedRoutes'
 
 export const AllRoutes = () => {
   return (
-    <div className='flex flex-col px-4 md:pl-10 dark:text-white dark:bg-dark grow transition-colors duration-300'>
+    <div className='flex flex-col px-4 transition-colors duration-300 md:pl-10 dark:text-white dark:bg-dark grow'>
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='products' element={<ProductsList />} />
@@ -19,6 +19,14 @@ export const AllRoutes = () => {
           element={
             <ProtectedRoutes>
               <CartPage />
+            </ProtectedRoutes>
+          }
+        />
+        <Route
+          path='order-summary'
+          element={
+            <ProtectedRoutes>
+              <OrderPage />
             </ProtectedRoutes>
           }
         />
