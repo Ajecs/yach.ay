@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom'
 import NotFoundLogo from '../assets/images/logo-not-found.svg'
 import { PrimaryButton } from '../components/Elements/PrimaryButton'
+import { useTitle } from '../hooks/useTitle'
 
 export const PageNotFound = () => {
+  useTitle('404 Página no encontrada')
+
   return (
     <main className=''>
       <div className='flex flex-col items-center gap-12 w-fit mx-auto'>

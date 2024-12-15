@@ -1,6 +1,9 @@
 import { useRef } from 'react'
+import { useTitle } from '../hooks/useTitle'
+
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+
 import { register } from '../services'
 
 export const Register = () => {
@@ -19,9 +22,11 @@ export const Register = () => {
     }
     // register service
     const data = await register(authDetail)
-    
+
     data.accessToken ? navigate('/products') : toast.error(data)
   }
+  
+  useTitle('Registro')
 
   return (
     <section className='bg-gray-50 dark:bg-gray-900'>

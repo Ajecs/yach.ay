@@ -1,6 +1,9 @@
 import { useRef } from 'react'
+import { useTitle } from '../hooks/useTitle'
+
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+
 import { login } from '../services'
 
 export const Login = () => {
@@ -32,6 +35,8 @@ export const Login = () => {
       })
     })  */
   }
+
+  useTitle('Inicio de sesión')
 
   return (
     <section className='bg-gray-50 dark:bg-transparent'>
