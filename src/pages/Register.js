@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import { register } from '../services'
 
 export const Register = () => {
   const navigate = useNavigate()
@@ -16,24 +17,10 @@ export const Register = () => {
       email: emailRef.current.value,
       password: passwordRef.current.value
     }
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(authDetail)
-    }
-    const response = await fetch(
-      'http://localhost:8000/register',
-      requestOptions
-    )
-    // json server auth contiene la ruta /register para registrar nuevos usuarios
-
-    const data = await response.json()
+    // register service
+    const data = await register(authDetail)
+    
     data.accessToken ? navigate('/products') : toast.error(data)
-
-      if (data.accessToken) {
-        sessionStorage.setItem('token', JSON.stringify(data.accessToken))
-        sessionStorage.setItem('yd', JSON.stringify(data.user.id))
-      }
   }
 
   return (

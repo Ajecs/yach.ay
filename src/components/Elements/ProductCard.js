@@ -36,7 +36,7 @@ export const ProductCard = ({ product }) => {
       <div className='h-full flex flex-col items-end bg-white border border-gray-200 rounded-lg shadow md:max-w-sm lg:max-w-md dark:bg-gray-800 dark:border-gray-700'>
         <Link to={`/products/${id}`} className='relative'>
           {best_seller && (
-            <span className='absolute top-8 left-8 px-2 bg-accent-dark bg-opacity-90 text-white rounded'>
+            <span className='absolute top-12 left-10 px-2 bg-accent-dark bg-opacity-90 text-white rounded'>
               Best Seller
             </span>
           )}

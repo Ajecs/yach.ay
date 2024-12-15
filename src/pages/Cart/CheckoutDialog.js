@@ -1,57 +1,32 @@
 import { useEffect, useState, useRef } from 'react'
 import { useCart } from '../../context'
 import { useNavigate } from 'react-router-dom'
+import { createOrder, getUser } from '../../services'
 
 export const CheckoutDialog = ({ setShowDialog }) => {
   const { cartList, total, clearCart } = useCart()
   const [user, setUser] = useState({})
 
-  const token = JSON.parse(sessionStorage.getItem('token')),
-    yid = JSON.parse(sessionStorage.getItem('yid'))
+
 
   const navigate = useNavigate()
 
   // Data user request
   useEffect(() => {
-    async function getUser() {
-      const response = await fetch(`http://localhost:8000/600/users/${yid}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        }
-      })
-      const data = await response.json()
+    async function fetchData() {
+      // Data user service
+      const data = await getUser()
       setUser(data)
     }
-    getUser()
-  }, [token, yid])
+    fetchData()
+  }, [])
 
   // Fetch Order Request
   async function handleOrder(event) {
     event.preventDefault()
     /* Se requiere la información tanto del usuario como del pedido */
     try {
-      const order = {
-        cartList: cartList,
-        amount_paid: total,
-        quantity: cartList.length,
-        user: {
-          name: user.name,
-          email: user.email,
-          id: user.id
-        }
-      }
-
-      const response = await fetch('http://localhost:8000/660/orders', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify(order)
-      })
-      const data = await response.json()
+      const data = await createOrder(cartList, total, user)
       clearCart()
       // * Los datos pueden ser pasados a través de useNavigate con state
       navigate('/order-summary', { state: { status: true, order: data } })

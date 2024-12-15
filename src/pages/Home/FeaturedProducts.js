@@ -1,19 +1,18 @@
 import { useEffect, useState } from 'react'
 import { ProductCard } from '../../components'
+import { getFeaturedProductList } from '../../services'
 
 export const FeaturedProducts = () => {
   const [products, setProducts] = useState([])
 
   useEffect(() => {
-    return () => {
-      async function fetchFeaturedProducts() {
-        const response = await fetch('http://localhost:8000/featured_products')
-        const data = await response.json()
-        setProducts(data)
-      }
-
-      fetchFeaturedProducts()
+    async function fetchFeaturedProducts() {
+      //  get Featured Products service
+      const data = await getFeaturedProductList()
+      setProducts(data)
     }
+
+    fetchFeaturedProducts()
   }, [])
 
   return (

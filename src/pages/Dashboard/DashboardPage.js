@@ -1,30 +1,19 @@
 import { useEffect, useState } from 'react'
 import { DashboardCard } from './DashboardCard'
 import { DashboardEmpty } from './DashboardEmpty'
+import { getUserOrders } from '../../services'
 
 export const DashboardPage = () => {
-  const token = JSON.parse(sessionStorage.getItem('token')),
-    yid = JSON.parse(sessionStorage.getItem('yid'))
-  
-    const [orderList, setOrderList] = useState([])
+  const [orderList, setOrderList] = useState([])
 
   useEffect(() => {
     async function fetchOrders() {
-      const response = await fetch(
-        `http://localhost:8000/660/orders?user_id=${yid}`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`
-          }
-        }
-      )
-      const data = await response.json()
+      // Data user order service
+      const data = await getUserOrders()
       setOrderList(data)
     }
     fetchOrders()
-  }, [token, yid])
+  }, [])
 
   return (
     <main className='my-8'>
