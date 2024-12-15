@@ -1,7 +1,10 @@
 import { NavLink, useNavigate } from 'react-router-dom'
+import { useCart } from '../../context'
 
 export const DropdownLoggedIn = (setShowDropdown) => {
-  const navigate = useNavigate() 
+  const navigate = useNavigate()
+
+  const { cartList } = useCart()
 
   function handleLogOut() {
     sessionStorage.removeItem('token')
