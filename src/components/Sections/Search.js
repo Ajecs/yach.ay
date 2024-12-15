@@ -10,7 +10,11 @@ export const Search = ({setShowSearchBar}) => {
     event.preventDefault()
     navigate(`/products?q=${searchRef.current.value}`)
     setShowSearchBar(false)
-    // console.log(searchValue)
+    /* 
+      TODO Solucionar el error en desktop producto de mostrar barra de busqueda
+      en la versión móvil
+    */
+     
   }
 
   return (
