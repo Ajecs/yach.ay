@@ -38,7 +38,9 @@ export const ProductsList = () => {
       }
     }
     fetchProducts()
-  }, [searchTerm])
+    // Se evita agregar la dependencia initialProductList lo que genera un loop. 
+    // De lo contrario es necesario usar el hook useCallback
+  }, [searchTerm]) //eslint-disable-line
 
   return (
     <main className='relative'>
