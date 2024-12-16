@@ -5,15 +5,26 @@ import { DashboardEmpty } from './DashboardEmpty'
 
 import { getUserOrders } from '../../services'
 import { useTitle } from '../../hooks/useTitle'
+import { toast } from 'react-toastify'
 
 export const DashboardPage = () => {
   const [orderList, setOrderList] = useState([])
 
   useEffect(() => {
     async function fetchOrders() {
-      // Data user order service
-      const data = await getUserOrders()
-      setOrderList(data)
+      try {
+        // Data user order service
+        const data = await getUserOrders()
+        setOrderList(data)
+      } catch (error) {
+        toast.error(
+          `Error en el servidor, no se ha podido cargar la página (error: ${error.message})`,
+          {
+            closeButton: true,
+            autoClose: false
+          }
+        )
+      }
     }
     fetchOrders()
   }, [])

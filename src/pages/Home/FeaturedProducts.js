@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { ProductCard } from '../../components'
 import { getFeaturedProductList } from '../../services'
+import { toast } from 'react-toastify'
 
 export const FeaturedProducts = () => {
   const [products, setProducts] = useState([])
@@ -8,8 +9,18 @@ export const FeaturedProducts = () => {
   useEffect(() => {
     async function fetchFeaturedProducts() {
       //  get Featured Products service
-      const data = await getFeaturedProductList()
-      setProducts(data)
+      try {
+        const data = await getFeaturedProductList()
+        setProducts(data)
+      } catch (error) {
+        toast.error(
+          `Error en el servidor, no se ha podido cargar la página (error: ${error.message})`,
+          {
+            closeButton: true,
+            autoClose: false
+          }
+        )
+      }
     }
 
     fetchFeaturedProducts()

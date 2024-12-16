@@ -1,6 +1,7 @@
 import { NavLink, useNavigate } from 'react-router-dom'
 import { getUser, logout } from '../../services'
 import { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
 
 export const DropdownLoggedIn = ({ setShowDropdown }) => {
   const navigate = useNavigate()
@@ -8,8 +9,18 @@ export const DropdownLoggedIn = ({ setShowDropdown }) => {
 
   useEffect(() => {
     async function fetchData() {
-      const data = await getUser()
-      setUser(data)
+      try {
+        const data = await getUser()
+        setUser(data)
+      } catch (error) {
+        toast.error(
+          `Error en el servidor, no se ha podido cargar la página (error: ${error.message})`,
+          {
+            closeButton: true,
+            autoClose: false
+          }
+        )
+      }
     }
     fetchData()
   }, [])

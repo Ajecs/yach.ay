@@ -4,6 +4,7 @@ import { Rating } from '../components'
 import { useTitle } from '../hooks/useTitle'
 import { useCart } from '../context'
 import { getProduct } from '../services'
+import { toast } from 'react-toastify'
 
 export const ProductDetail = () => {
   const { cartList, addToCart, removeFromCart } = useCart(),
@@ -14,12 +15,22 @@ export const ProductDetail = () => {
   const { id } = useParams()
 
   useEffect(() => {
-    async function fetchProducts() {
+    async function fetchProduct() {
       // Get product service
-      const data = await getProduct(id)
-      setProduct(data)
+      try {
+        const data = await getProduct(id)
+        setProduct(data)
+      } catch (error) {
+        toast.error(
+          `Error en el servidor, no se ha podido cargar la página (error: ${error.message})`,
+          {
+            closeButton: true,
+            autoClose: false
+          }
+        )
+      }
     }
-    fetchProducts()
+    fetchProduct()
   }, [id])
 
   useEffect(() => {

@@ -7,6 +7,7 @@ import { FilterBar } from './FilterBar'
 
 import { getProductList } from '../../services'
 import { useFilter } from '../../context'
+import { toast } from 'react-toastify'
 
 export const ProductsList = () => {
   // De esta forma se tiene acceso a los valores del contexto
@@ -23,8 +24,18 @@ export const ProductsList = () => {
 
   useEffect(() => {
     async function fetchProducts() {
-      const data = await getProductList(searchTerm)
-      initialProductList(data)
+      try {
+        const data = await getProductList(searchTerm)
+        initialProductList(data)
+      } catch(error) {
+        toast.error(
+          `Error en el servidor, no se ha podido cargar la página (error: ${error.message})`,
+          {
+            closeButton: true,
+            autoClose: false
+          }
+        )
+      }
     }
     fetchProducts()
   }, [searchTerm])

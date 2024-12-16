@@ -2,12 +2,11 @@ import { useEffect, useState, useRef } from 'react'
 import { useCart } from '../../context'
 import { useNavigate } from 'react-router-dom'
 import { createOrder, getUser } from '../../services'
+import { toast } from 'react-toastify'
 
 export const CheckoutDialog = ({ setShowDialog }) => {
   const { cartList, total, clearCart } = useCart()
   const [user, setUser] = useState({})
-
-
 
   const navigate = useNavigate()
 
@@ -15,8 +14,18 @@ export const CheckoutDialog = ({ setShowDialog }) => {
   useEffect(() => {
     async function fetchData() {
       // Data user service
-      const data = await getUser()
-      setUser(data)
+      try {
+        const data = await getUser()
+        setUser(data)
+      } catch (error) {
+        toast.error(
+          `Error en el servidor, no se ha podido cargar la página (error: ${error.message})`,
+          {
+            closeButton: true,
+            autoClose: false
+          }
+        )
+      }
     }
     fetchData()
   }, [])
@@ -31,6 +40,13 @@ export const CheckoutDialog = ({ setShowDialog }) => {
       // * Los datos pueden ser pasados a través de useNavigate con state
       navigate('/order-summary', { state: { status: true, order: data } })
     } catch (error) {
+       toast.error(
+         `Error en el servidor, no se ha podido cargar la página (error: ${error.message})`,
+         {
+           closeButton: true,
+           autoClose: false
+         }
+       )
       navigate('/order-summary', { state: { status: false } })
     }
   }

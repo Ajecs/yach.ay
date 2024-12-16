@@ -15,17 +15,28 @@ export const Register = () => {
 
   const handleRegister = async (event) => {
     event.preventDefault()
-    const authDetail = {
-      name: nameRef.current.value,
-      email: emailRef.current.value,
-      password: passwordRef.current.value
+    try {
+      const authDetail = {
+        name: nameRef.current.value,
+        email: emailRef.current.value,
+        password: passwordRef.current.value
+      }
+      // register service
+      const data = await register(authDetail)
+      data.accessToken ? navigate('/products') : toast.error(`El email ingresado ya existe ${data}`)
+    } catch (error) {
+      if (error.status !== 400) {
+        toast.error(
+          `Error en el servidor, no se ha podido cargar la página (error: ${error.message})`,
+          {
+            closeButton: true,
+            autoClose: false
+          }
+        )
+      }
     }
-    // register service
-    const data = await register(authDetail)
-
-    data.accessToken ? navigate('/products') : toast.error(data)
   }
-  
+
   useTitle('Registro')
 
   return (

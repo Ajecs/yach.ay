@@ -11,6 +11,11 @@ export async function login(authDetail) {
   }
   const response = await fetch('http://localhost:8000/login', requestOptions),
     data = await response.json()
+  console.log(response)
+
+  if (!response.ok && response.status !== 400) {
+    throw { message: response.statusText, status: response.status }
+  }
 
   if (data.accessToken) {
     sessionStorage.setItem('token', JSON.stringify(data.accessToken))
@@ -28,6 +33,10 @@ export async function register(authDetail) {
   }
   const response = await fetch('http://localhost:8000/register', requestOptions)
   // json server auth contiene la ruta /register para registrar nuevos usuarios
+
+  if (response.status !== 400 && !response.ok) {
+    throw { message: response.statusText, status: response.status }
+  }
 
   const data = await response.json()
 

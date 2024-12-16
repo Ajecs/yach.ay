@@ -6,7 +6,7 @@ import { OrderSuccess } from './OrderSuccess'
 
 export const OrderPage = () => {
   // Se accede a los datos del check out (status ...) a partir de useLocation
-  const { state } = useLocation()
+  const { state } = useLocation()  /* ?? */
 
   useTitle('Resumen de pedido')
 

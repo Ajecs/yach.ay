@@ -13,13 +13,31 @@ export const Login = () => {
 
   const handleLogin = async (event) => {
     event.preventDefault()
-    const authDetail = {
-      email: emailRef.current.value,
-      password: passwordRef.current.value
+    try {
+      const authDetail = {
+        email: emailRef.current.value,
+        password: passwordRef.current.value
+      }
+      // login service
+      const data = await login(authDetail)
+
+      // data.accessToken ? navigate('/products') : toast.error(data)
+      if (data.accessToken) {
+        navigate('/products')
+      } else {
+        toast.error(data)
+      }
+    } catch (error) {
+      if (error.status !== 400) {
+        toast.error(
+          `Error en el servidor, no se ha podido cargar la página (error: ${error.message})`,
+          {
+            closeButton: true,
+            autoClose: false
+          }
+        )
+      }
     }
-    // login service
-    const data = await login(authDetail)
-    data.accessToken ? navigate('/products') : toast.error(data)
 
     /* TODO customize error messages 
 

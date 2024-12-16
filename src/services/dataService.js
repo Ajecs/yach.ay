@@ -20,6 +20,9 @@ export async function getUser() {
     `http://localhost:8000/600/users/${yid}`,
     requestOptions
   )
+  if (!response.ok) {
+    throw { message: response.statusText, status: response.status }
+  }
   const data = await response.json()
   return data
 }
@@ -28,16 +31,20 @@ export async function getUserOrders() {
   const browseDataSession = getSession(),
     { token, yid } = browseDataSession
 
+  const requestOptions = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    }
+  }
   const response = await fetch(
     `http://localhost:8000/660/orders?user_id=${yid}`,
-    {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-      }
-    }
+    requestOptions
   )
+  if (!response.ok) {
+    throw { message: response.statusText, status: response.status }th
+  }
   const data = await response.json()
   return data
 }
@@ -56,15 +63,22 @@ export async function createOrder(cartList, total, user) {
       id: user.id
     }
   }
-
-  const response = await fetch('http://localhost:8000/660/orders', {
+  const requestOptions = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`
     },
     body: JSON.stringify(order)
-  })
+  }
+
+  const response = await fetch(
+    'http://localhost:8000/660/orders',
+    requestOptions
+  )
+  if (!response.ok) {
+    throw { message: response.statusText, status: response.status }
+  }
   const data = await response.json()
 
   return data
