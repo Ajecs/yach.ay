@@ -11,7 +11,7 @@ export const DropdownLoggedIn = ({ setShowDropdown }) => {
     async function fetchData() {
       try {
         const data = await getUser()
-        setUser(data)
+        data.email ? setUser(data) : handleLogOut()
       } catch (error) {
         toast.error(
           `Error en el servidor, no se ha podido cargar la página (error: ${error.message})`,
@@ -21,6 +21,9 @@ export const DropdownLoggedIn = ({ setShowDropdown }) => {
           }
         )
       }
+      /*  
+        ! Error al registrarse y luego obtener los datos en el dropdown (no sucede en login)
+      */
     }
     fetchData()
   }, [])

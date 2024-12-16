@@ -1,3 +1,5 @@
+const host = process.env.REACT_APP_HOST
+
 function getSession() {
   const token = JSON.parse(sessionStorage.getItem('token')),
     yid = JSON.parse(sessionStorage.getItem('yid'))
@@ -17,7 +19,7 @@ export async function getUser() {
     }
   }
   const response = await fetch(
-    `http://localhost:8000/600/users/${yid}`,
+    `${host}/600/users/${yid}`,
     requestOptions
   )
   if (!response.ok) {
@@ -39,11 +41,11 @@ export async function getUserOrders() {
     }
   }
   const response = await fetch(
-    `http://localhost:8000/660/orders?user_id=${yid}`,
+    `${host}/660/orders?user_id=${yid}`,
     requestOptions
   )
   if (!response.ok) {
-    throw { message: response.statusText, status: response.status }th
+    throw { message: response.statusText, status: response.status }
   }
   const data = await response.json()
   return data
@@ -73,7 +75,7 @@ export async function createOrder(cartList, total, user) {
   }
 
   const response = await fetch(
-    'http://localhost:8000/660/orders',
+    `${host}/660/orders`,
     requestOptions
   )
   if (!response.ok) {

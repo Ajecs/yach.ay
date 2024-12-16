@@ -3,13 +3,15 @@
   de datos a la API para la autenticación de usuarios
 */
 
+const host = process.env.REACT_APP_HOST
+
 export async function login(authDetail) {
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(authDetail)
   }
-  const response = await fetch('http://localhost:8000/login', requestOptions),
+  const response = await fetch(`${host}/login`, requestOptions),
     data = await response.json()
   console.log(response)
 
@@ -31,7 +33,7 @@ export async function register(authDetail) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(authDetail)
   }
-  const response = await fetch('http://localhost:8000/register', requestOptions)
+  const response = await fetch(`${host}/register`, requestOptions)
   // json server auth contiene la ruta /register para registrar nuevos usuarios
 
   if (response.status !== 400 && !response.ok) {
