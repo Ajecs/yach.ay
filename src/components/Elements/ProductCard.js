@@ -13,7 +13,7 @@ export const ProductCard = ({ product }) => {
     overview,
     price,
     best_seller,
-    image_local,
+    poster,
     rating,
     in_stock
   } = product
@@ -42,7 +42,7 @@ export const ProductCard = ({ product }) => {
           )}
           <img
             className='p-8 rounded-t-lg aspect-square object-cover'
-            src={image_local}
+            src={poster}
             alt='product'
           />
         </Link>

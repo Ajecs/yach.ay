@@ -16,7 +16,7 @@ export async function login(authDetail) {
   console.log(response)
 
   if (!response.ok && response.status !== 400) {
-    throw { message: response.statusText, status: response.status }
+    throw { message: response.statusText, status: response.status }//eslint-disable-line
   }
 
   if (data.accessToken) {
@@ -37,7 +37,7 @@ export async function register(authDetail) {
   // json server auth contiene la ruta /register para registrar nuevos usuarios
 
   if (response.status !== 400 && !response.ok) {
-    throw { message: response.statusText, status: response.status }
+    throw { message: response.statusText, status: response.status } //eslint-disable-line
   }
 
   const data = await response.json()

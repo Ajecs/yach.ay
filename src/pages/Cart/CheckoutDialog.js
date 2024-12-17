@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import { useCart } from '../../context'
 import { useNavigate } from 'react-router-dom'
 import { createOrder, getUser } from '../../services'
