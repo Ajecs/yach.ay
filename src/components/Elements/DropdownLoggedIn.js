@@ -42,7 +42,7 @@ export const DropdownLoggedIn = ({ setShowDropdown }) => {
         className='absolute z-10 top-2 -left-16 font-normal bg-white divide-y divide-gray-300 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600'
       >
         <div className='p-4 text-lg font-medium truncate dark:text-white divide-y divide-gray-300 dark:divide-gray-400'>
-          {user.name}
+          {user.name || user.email}
         </div>
         <ul
           className='py-2 text-sm text-gray-700 dark:text-gray-400'

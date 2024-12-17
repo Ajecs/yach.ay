@@ -6,36 +6,39 @@
 export async function login(authDetail) {
   const requestOptions = {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'content-Type': 'application/json' },
     body: JSON.stringify(authDetail)
   }
   const response = await fetch(
-      `${process.env.REACT_APP_HOST}/login`,
-      requestOptions
-    ),
-    data = await response.json()
-  console.log(response)
+    `${process.env.REACT_APP_HOST}/login`,
+    requestOptions
+  )
 
-  if (!response.ok && response.status !== 400) {
+  
+  
+  if (!response.ok) {
     const errorMessage = {
       message: response.statusText,
       status: response.status
     }
     throw errorMessage
   }
-
+  
+  const data = await response.json()
+  
+  
   if (data.accessToken) {
     sessionStorage.setItem('token', JSON.stringify(data.accessToken))
     sessionStorage.setItem('yid', JSON.stringify(data.user.id))
   }
-
+  
   return data
 }
 
 export async function register(authDetail) {
   const requestOptions = {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'content-Type': 'application/json' },
     body: JSON.stringify(authDetail)
   }
   const response = await fetch(
@@ -56,7 +59,7 @@ export async function register(authDetail) {
 
   if (data.accessToken) {
     sessionStorage.setItem('token', JSON.stringify(data.accessToken))
-    sessionStorage.setItem('yd', JSON.stringify(data.user.id))
+    sessionStorage.setItem('yid', JSON.stringify(data.user.id))
   }
 
   return data

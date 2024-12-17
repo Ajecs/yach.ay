@@ -16,9 +16,16 @@ export async function getUser() {
       Authorization: `Bearer ${token}`
     }
   }
-  const response = await fetch(`${process.env.REACT_APP_HOST}/600/users/${yid}`, requestOptions)
-  if (!response.ok) {
-    throw { message: response.statusText, status: response.status } //eslint-disable-line
+  const response = await fetch(
+    `${process.env.REACT_APP_HOST}/600/users/${yid}`,
+    requestOptions
+  )
+  if (!response.ok && response.status !== 400) {
+    const errorMessage = {
+      message: response.statusText,
+      status: response.status
+    }
+    throw errorMessage
   }
   const data = await response.json()
   return data
@@ -69,7 +76,10 @@ export async function createOrder(cartList, total, user) {
     body: JSON.stringify(order)
   }
 
-  const response = await fetch(`${process.env.REACT_APP_HOST}/660/orders`, requestOptions)
+  const response = await fetch(
+    `${process.env.REACT_APP_HOST}/660/orders`,
+    requestOptions
+  )
   if (!response.ok) {
     throw { message: response.statusText, status: response.status } //eslint-disable-line
     // * Otra solución es generar un new Error o convertir la declaración en una variable
