@@ -18,10 +18,7 @@ export async function getUser() {
       Authorization: `Bearer ${token}`
     }
   }
-  const response = await fetch(
-    `${host}/600/users/${yid}`,
-    requestOptions
-  )
+  const response = await fetch(`${host}/600/users/${yid}`, requestOptions)
   if (!response.ok) {
     throw { message: response.statusText, status: response.status } //eslint-disable-line
   }
@@ -74,12 +71,11 @@ export async function createOrder(cartList, total, user) {
     body: JSON.stringify(order)
   }
 
-  const response = await fetch(
-    `${host}/660/orders`,
-    requestOptions
-  )
+  const response = await fetch(`${host}/660/orders`, requestOptions)
   if (!response.ok) {
     throw { message: response.statusText, status: response.status } //eslint-disable-line
+    // * Otra solución es generar un new Error o convertir la declaración en una variable
+    // Ver authService
   }
   const data = await response.json()
 
