@@ -1,5 +1,3 @@
-const host = process.env.REACT_APP_HOST
-
 function getSession() {
   const token = JSON.parse(sessionStorage.getItem('token')),
     yid = JSON.parse(sessionStorage.getItem('yid'))
@@ -18,7 +16,7 @@ export async function getUser() {
       Authorization: `Bearer ${token}`
     }
   }
-  const response = await fetch(`${host}/600/users/${yid}`, requestOptions)
+  const response = await fetch(`${process.env.REACT_APP_HOST}/600/users/${yid}`, requestOptions)
   if (!response.ok) {
     throw { message: response.statusText, status: response.status } //eslint-disable-line
   }
@@ -38,7 +36,7 @@ export async function getUserOrders() {
     }
   }
   const response = await fetch(
-    `${host}/660/orders?user_id=${yid}`,
+    `${process.env.REACT_APP_HOST}/660/orders?user_id=${yid}`,
     requestOptions
   )
   if (!response.ok) {
@@ -71,7 +69,7 @@ export async function createOrder(cartList, total, user) {
     body: JSON.stringify(order)
   }
 
-  const response = await fetch(`${host}/660/orders`, requestOptions)
+  const response = await fetch(`${process.env.REACT_APP_HOST}/660/orders`, requestOptions)
   if (!response.ok) {
     throw { message: response.statusText, status: response.status } //eslint-disable-line
     // * Otra solución es generar un new Error o convertir la declaración en una variable
