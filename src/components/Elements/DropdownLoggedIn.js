@@ -51,7 +51,7 @@ export const DropdownLoggedIn = ({ setShowDropdown }) => {
           <li>
             <NavLink
               onClick={() => setShowDropdown(false)}
-              to='/dashboard'
+              to='dashboard'
               className='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'
             >
               Panel
@@ -60,7 +60,7 @@ export const DropdownLoggedIn = ({ setShowDropdown }) => {
           <li>
             <NavLink
               onClick={() => setShowDropdown(false)}
-              to='/products'
+              to='products'
               className=' block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'
             >
               Todos los eBooks

@@ -14,7 +14,7 @@ export const DropdownLoggedOut = (setShowDropdown) => {
           <li>
             <NavLink
               onClick={() => setShowDropdown(false)}
-              to='/products'
+              to='products'
               className='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'
             >
               Todos los eBooks
@@ -23,7 +23,7 @@ export const DropdownLoggedOut = (setShowDropdown) => {
           <li>
             <NavLink
               onClick={() => setShowDropdown(false)}
-              to='/login'
+              to='login'
               className=' block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'
             >
               Iniciar sesión
@@ -33,7 +33,7 @@ export const DropdownLoggedOut = (setShowDropdown) => {
         <div className='py-1'>
           <NavLink
             onClick={() => setShowDropdown(false)}
-            to='/register'
+            to='register'
             className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white'
           >
             Registrarse
